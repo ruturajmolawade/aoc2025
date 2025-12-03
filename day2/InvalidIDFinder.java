@@ -1,14 +1,16 @@
+package day2;
+
 import java.util.*;
 
 public class InvalidIDFinder {
- 
+
     private static List<long[]> parseRanges(String[] inputRanges) {
         List<long[]> ranges = new ArrayList<>();
         for (String range : inputRanges) {
             String[] parts = range.split("-");
             long start = Long.parseLong(parts[0]);
             long end = Long.parseLong(parts[1]);
-            ranges.add(new long[] {start, end});
+            ranges.add(new long[] { start, end });
         }
         return ranges;
     }
@@ -23,7 +25,7 @@ public class InvalidIDFinder {
         return maxDigits;
     }
 
-    // function to collect all invalid IDs 
+    // function to collect all invalid IDs
     private static Set<Long> findInvalidIds(int maxDigits) {
         Set<Long> invalidIds = new HashSet<>();
         for (int digits = 2; digits <= maxDigits; digits += 2) {
@@ -67,21 +69,30 @@ public class InvalidIDFinder {
         return sum;
     }
 
-    // Test 
+    // Test
     public static void main(String[] args) {
         String[] inputRanges = {
-            "11-22",
-            "95-115",
-            "998-1012",
-            "1188511880-1188511890",
-            "222220-222224",
-            "1698522-1698528",
-            "446443-446449",
-            "38593856-38593862",
-            "565653-565659",
-            "824824821-824824827",
-            "2121212118-2121212124"
+                "11-22",
+                "95-115",
+                "998-1012",
+                "1188511880-1188511890",
+                "222220-222224",
+                "1698522-1698528",
+                "446443-446449",
+                "38593856-38593862",
+                "565653-565659",
+                "824824821-824824827",
+                "2121212118-2121212124"
         };
-        System.out.println("Sum of invalid IDs: " + sumInvalidIDs(inputRanges));
+
+        long startTime = System.nanoTime();
+        long result = sumInvalidIDs(inputRanges);
+        long endTime = System.nanoTime();
+
+        long durationNanos = endTime - startTime;
+        double durationMillis = durationNanos / 1_000_000.0;
+
+        System.out.println("Sum of invalid IDs: " + result);
+        System.out.println("Execution time: " + durationMillis + " ms");
     }
 }
