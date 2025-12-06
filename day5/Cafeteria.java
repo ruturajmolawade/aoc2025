@@ -38,7 +38,8 @@ public class Cafeteria {
         ranges.sort(new Comparator<long[]>() {
             @Override
             public int compare(long[] l1, long[] l2) {
-                return (int) (l1[0] == l2[0] ? l1[1] - l2[1] : l1[0] - l2[0]);
+                int cmp = Long.compare(l1[0], l2[0]);
+                return cmp != 0 ? cmp : Long.compare(l1[1], l2[1]);
             }
         });
 
