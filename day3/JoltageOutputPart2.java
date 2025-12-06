@@ -1,13 +1,18 @@
 package day3;
 
-public class JoltageOutput {
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
+public class JoltageOutputPart2 {
 
     private static int findTotalJoltage(String[] banks) {
         int totalJoltage = 0;
         for (String bank : banks) {
             int maxJoltageSoFar = 0;
             // need the bank size >= 2
-            if (bank.isEmpty() || bank.length() == 1) {
+            if (bank.isEmpty() || bank.length() == 11) {
                 continue;
             }
             int firstMaxJoltageBattery = Character.getNumericValue(bank.charAt(0));
@@ -25,13 +30,13 @@ public class JoltageOutput {
 
     }
 
-    public static void main(String[] args) {
-        String[] banks = {
-                "987654321111111",
-                "811111111111119",
-                "234234234234278",
-                "818181911112111"
-        };
-        System.out.print(findTotalJoltage(banks));
+    public static void main(String[] args) throws IOException {
+        // Read input from file
+        List<String> lines = Files.readAllLines(Paths.get("day3/input.txt"));
+
+        // Create banks array from input
+        String[] banks = lines.toArray(new String[0]);
+
+        System.out.println(findTotalJoltage(banks));
     }
 }

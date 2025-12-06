@@ -1,8 +1,9 @@
 package day2;
 
+import java.io.*;
 import java.util.*;
 
-public class InvalidIDFinder {
+public class InvalidIDFinderPart1 {
 
     private static List<long[]> parseRanges(String[] inputRanges) {
         List<long[]> ranges = new ArrayList<>();
@@ -69,30 +70,34 @@ public class InvalidIDFinder {
         return sum;
     }
 
+    private static String[] readInputRanges(String filename) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(filename));
+        StringBuilder content = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            content.append(line);
+        }
+        reader.close();
+        return content.toString().trim().split(",");
+    }
+
     // Test
     public static void main(String[] args) {
-        String[] inputRanges = {
-                "11-22",
-                "95-115",
-                "998-1012",
-                "1188511880-1188511890",
-                "222220-222224",
-                "1698522-1698528",
-                "446443-446449",
-                "38593856-38593862",
-                "565653-565659",
-                "824824821-824824827",
-                "2121212118-2121212124"
-        };
+        try {
+            String[] inputRanges = readInputRanges("day2/input.txt");
 
-        long startTime = System.nanoTime();
-        long result = sumInvalidIDs(inputRanges);
-        long endTime = System.nanoTime();
+            long startTime = System.nanoTime();
+            long result = sumInvalidIDs(inputRanges);
+            long endTime = System.nanoTime();
 
-        long durationNanos = endTime - startTime;
-        double durationMillis = durationNanos / 1_000_000.0;
+            long durationNanos = endTime - startTime;
+            double durationMillis = durationNanos / 1_000_000.0;
 
-        System.out.println("Sum of invalid IDs: " + result);
-        System.out.println("Execution time: " + durationMillis + " ms");
+            System.out.println("Sum of invalid IDs: " + result);
+            System.out.println("Execution time: " + durationMillis + " ms");
+        } catch (IOException e) {
+            System.err.println("Error reading input file: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
