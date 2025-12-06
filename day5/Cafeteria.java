@@ -90,12 +90,22 @@ public class Cafeteria {
         return false;
     }
 
+    private static long findTotalFreshIngredients() {
+        long totalFreshIngredients = 0;
+
+        for (long[] range : mergedRanges) {
+            totalFreshIngredients += range[1] - range[0] + 1;
+        }
+        return totalFreshIngredients;
+    }
+
     public static void main(String[] args) throws IOException {
         // Read input from file
         List<String> lines = Files.readAllLines(Paths.get("day5/input.txt"));
         processInput(lines);
         mergeRanges();
         System.out.println(countNumberOfIngredientsAvailable());
+        System.out.println(findTotalFreshIngredients());
 
     }
 
