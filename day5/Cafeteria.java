@@ -104,8 +104,10 @@ public class Cafeteria {
         List<String> lines = Files.readAllLines(Paths.get("day5/input.txt"));
         processInput(lines);
         mergeRanges();
-        System.out.println(countNumberOfIngredientsAvailable());
-        System.out.println(findTotalFreshIngredients());
+        // Answer for Part 1
+        System.out.println("Part 1 Answer is : " + countNumberOfIngredientsAvailable());
+        // Answer for Part 2
+        System.out.println("Part 2 Answer is : " + findTotalFreshIngredients());
 
     }
 
