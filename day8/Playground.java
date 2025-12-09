@@ -103,6 +103,27 @@ public class Playground {
                 i++;
                 continue;
             }
+            // both boxes are in different regions, need to merge
+            if (boxToRegionMapping.containsKey(box1Id) && boxToRegionMapping.containsKey(box2Id)
+                    && !boxToRegionMapping.get(box1Id).equalsIgnoreCase(boxToRegionMapping.get(box2Id))) {
+                String region1 = boxToRegionMapping.get(box1Id);
+                String region2 = boxToRegionMapping.get(box2Id);
+
+                // Merge region2 into region1
+                int newSize = regionSize.get(region1) + regionSize.get(region2);
+                regionSize.put(region1, newSize);
+                regionSize.remove(region2);
+
+                // Update all boxes in region2 to point to region1
+                for (Map.Entry<String, String> entry : boxToRegionMapping.entrySet()) {
+                    if (entry.getValue().equals(region2)) {
+                        entry.setValue(region1);
+                    }
+                }
+
+                i++;
+                continue;
+            }
 
         }
         for (int size : regionSize.values()) {
